@@ -6,7 +6,7 @@
 -->
 <html>
   <head>
-    <title>Simple Polygon</title>
+    <title>Water Aware</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script>
       /**
@@ -16,9 +16,10 @@
        */
       // This example creates a simple polygon representing the Bermuda Triangle.
       function initMap() {
+        var polys = JSON.parse('{{ polys | safe }}');
         const map = new google.maps.Map(document.getElementById("map"), {
           zoom: 5,
-          center: { lat: 32.5393884, lng: -117.4848996 },
+          center: polys[0][0],
           mapTypeId: "terrain",
         });
         // Define the LatLng coordinates for the polygon's path.
@@ -31,21 +32,24 @@
         // POLYGON((-113.2656138 35.3418495,-113.2656138 48.5199846,-100.2532953 \
         // 48.5199846,-100.2532953 35.3418495,-113.2656138 35.3418495))
 
-        var polys = JSON.parse('{{ polys | safe }}');
+        
+
         console.log(polys[0])
         const triangleCoords = [
-        //   { lat: 25.774, lng: -80.19 },
-        //   { lat: 18.466, lng: -66.118 },
-        //   { lat: 32.321, lng: -64.757 },
-        //   { lat: 25.774, lng: -80.19 },
         polys[0]
-        //   { lat: 32.5393884, lng: -117.4848996 },
-        //   { lat: 33.3125625, lng: -117.4848996 },
-        //   { lat: 33.3125625, lng: -116.6258223 },
-        //   { lat: 32.5393884, lng: -116.6258223 },
-        //   { lat: 32.5393884, lng: -117.4848996 },
         ];
+        const test = [
+            polys[1]
+        ]
         // Construct the polygon.
+        const testpo = new google.maps.Polygon({
+            paths: test,
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+        })
         const bermudaTriangle = new google.maps.Polygon({
           paths: triangleCoords,
           strokeColor: "#FF0000",
@@ -54,7 +58,7 @@
           fillColor: "#FF0000",
           fillOpacity: 0.35,
         });
-
+        testpo.setMap(map)
         bermudaTriangle.setMap(map);
       }
 
@@ -85,8 +89,11 @@
         margin-left: 5%;
         margin-bottom: 1%;
       }
-      h1 {
+      h1{
         padding-left: 5%;
+      }
+      h3 {
+        padding-left: 3%;
       }
       #map {
         margin-left: 5%;
@@ -108,6 +115,7 @@
     <div class="main">
         <div class="left">
             <h1>Water Aware</h1>
+            <h3><a href="{{ url_for('about') }}">About</a></h3>
             <div class="form">
                 <p>Please type in your County</p>
                 <form action="{{ url_for('home') }}" method="post">
