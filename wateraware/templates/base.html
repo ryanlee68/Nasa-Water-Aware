@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/base.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <title>Simple Marker</title>
+    <h1>Water Aware</h1>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnxATYjE527zrolA4D2krAmZpGC_3Zl_o&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
+    <!-- <div class="map"> -->
+        <!-- The callback parameter is required, so we use console.debug as a noop -->
+        <gmp-map center="37.3017692565918,-120.4842529296875" zoom="14" map-id="DEMO_MAP_ID">
+          <gmp-advanced-marker position="37.3017692565918,-120.4842529296875" title="My location">
+          </gmp-advanced-marker>
+        </gmp-map>
+    <!-- {{googlemap("my_awesome_map", lat=0.23234234, lng=-0.234234234, markers=[(0.12,
+    -0.45345)])}} -->
+    <!-- </div> -->
+</body>
+</html>

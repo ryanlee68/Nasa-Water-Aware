@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Locator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- <link href="locatorplus.css" rel="stylesheet"> -->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/locatorplus.css') }}">
+    <script>
+      const CONFIGURATION = {
+        "locations": [
+          {"title":"Escondido Grill","address1":"601 Geary St","address2":"San Francisco, CA 94102, USA","coords":{"lat":37.7866,"lng":-122.4133},"placeId":"ChIJ5Sz52pGAhYAR1raOybzuDp8","actions":[{"label":"Reserve a table","defaultUrl":"https://www.gstatic.com/pantheon/images/maps/reserve_with_google_preview_v1.png"}]},
+          {"title":"Escondido Grill","address1":"747 3rd St","address2":"San Francisco, CA 94107, USA","coords":{"lat":37.7785,"lng":-122.392},"placeId":"ChIJeyVKpNd_j4ARLUED10OEr1s","actions":[{"label":"Reserve a table","defaultUrl":"https://www.gstatic.com/pantheon/images/maps/reserve_with_google_preview_v1.png"}]},
+          {"title":"Escondido Grill","address1":"1512 Stockton St","address2":"San Francisco, CA 94133, USA","coords":{"lat":37.7998,"lng":-122.4089},"placeId":"ChIJgYMdZvGAhYAR2ifWKOR5ek8","actions":[{"label":"Reserve a table","defaultUrl":"https://www.gstatic.com/pantheon/images/maps/reserve_with_google_preview_v1.png"}]},
+          {"title":"Escondido Grill","address1":"50 Clement St","address2":"San Francisco, CA 94118, USA","coords":{"lat":37.7833,"lng":-122.46},"placeId":"ChIJk_FWiDmHhYARgDVidBVO_RM","actions":[{"label":"Reserve a table","defaultUrl":"https://www.gstatic.com/pantheon/images/maps/reserve_with_google_preview_v1.png"}]},
+          {"title":"Escondido Grill","address1":"3755 Noriega St","address2":"San Francisco, CA 94122, USA","coords":{"lat":37.7529,"lng":-122.5042},"placeId":"ChIJ_2knd4-HhYARI5PPNZ7aasA","actions":[{"label":"Reserve a table","defaultUrl":"https://www.gstatic.com/pantheon/images/maps/reserve_with_google_preview_v1.png"}]},
+          {"title":"Escondido Grill","address1":"2619 Mission St","address2":"San Francisco, CA 94110, USA","coords":{"lat":37.7552,"lng":-122.4184},"placeId":"ChIJSwWfLT9-j4ARMGcgMs-tBRE","actions":[{"label":"Reserve a table","defaultUrl":"https://www.gstatic.com/pantheon/images/maps/reserve_with_google_preview_v1.png"}]},
+          {"title":"Escondido Grill","address1":"4935 Mission St","address2":"San Francisco, CA 94112, USA","coords":{"lat":37.7194,"lng":-122.4386},"placeId":"ChIJtYdd3IR-j4ARSybFjVnGTBw","actions":[{"label":"Reserve a table","defaultUrl":"https://www.gstatic.com/pantheon/images/maps/reserve_with_google_preview_v1.png"}]},
+          {"title":"Escondido Grill","address1":"6202 3rd St","address2":"San Francisco, CA 94124, USA","coords":{"lat":37.7223,"lng":-122.396},"placeId":"ChIJ0VRZVB9_j4ARaB7r66H67eg","actions":[{"label":"Reserve a table","defaultUrl":"https://www.gstatic.com/pantheon/images/maps/reserve_with_google_preview_v1.png"}]}
+        ],
+        "mapOptions": {"center":{"lat":38.0,"lng":-100.0},"fullscreenControl":true,"mapTypeControl":false,"streetViewControl":false,"zoom":4,"zoomControl":true,"maxZoom":17,"mapId":""},
+        "mapsApiKey": "AIzaSyAnxATYjE527zrolA4D2krAmZpGC_3Zl_o",
+        "capabilities": {"input":true,"autocomplete":true,"directions":false,"distanceMatrix":true,"details":false,"actions":true}
+      };
+
+    </script>
+    <!-- <script src="locatorplus.js" type="module"></script> -->
+    <script src="{{url_for('static', filename='locatorplus.js')}}"></script>
+  </head>
+  <body>
+    <!-- Uses the Extended Component Library (https://github.com/googlemaps/extended-component-library)
+         to configure Google Maps Platform APIs. -->
+    <gmpx-api-loader key="AIzaSyAnxATYjE527zrolA4D2krAmZpGC_3Zl_o" solution-channel="GMP_QB_locatorplus_v8_cABDF"></gmpx-api-loader>
+
+    <gmpx-split-layout>
+      <div id="locations-panel" slot="fixed">
+        <div id="locations-panel-list">
+          <header>
+            <h1 class="search-title">
+              <img src="https://fonts.gstatic.com/s/i/googlematerialicons/place/v15/24px.svg" alt=""/>
+              Find a location near you
+            </h1>
+            <gmpx-place-picker for-map="main-map" placeholder="Enter your address or zip code" type="geocode">
+            </gmpx-place-picker>
+          </header>
+          <div class="section-name" id="location-results-section-name">
+            All locations
+          </div>
+          <div class="results">
+            <ul id="location-results-list"></ul>
+          </div>
+        </div>
+      </div>
+      <gmp-map slot="main" id="main-map"></gmp-map>
+    </gmpx-split-layout>
+
+    <template id="locator-result-item-template">
+      <li>
+        <gmpx-place-data-provider auto-fetch-disabled>
+          <div class="result-item">
+            <button class="select-location">
+              <h2 class="name">
+                <gmpx-place-field-text field="displayName"></gmpx-place-field-text>
+              </h2>
+            </button>
+            <div class="address"></div>
+            <div class="actions"></div>
+            <div class="distance"></div>
+            <gmpx-place-directions-button condensed></gmpx-place-directions-button>
+          </div>
+        </gmpx-place-data-provider>
+      </li>
+    </template>
+  </body>
+</html>
