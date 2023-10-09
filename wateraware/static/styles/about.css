@@ -1,0 +1,21 @@
+body{
+    background-image: linear-gradient(to bottom right, #204d55, #0a3051);
+}
+h1 {
+background-color: teal;
+margin-left: 755px;
+margin-right: 755px;
+}
+.goal {
+border: 5px solid white;
+margin-right: 1555px;
+color:white;
+text-align: center;
+}
+#goals {
+border:3px dashed White;
+margin-left:300px;
+margin-right: 700px;
+color: #d7ddea;
+padding-left: 10px;
+}  
